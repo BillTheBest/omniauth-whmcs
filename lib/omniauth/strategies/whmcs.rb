@@ -2,17 +2,18 @@ require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
-    class Whmcs < OmniAuth::Strategies::OAuth2
+    class WHMCS < OmniAuth::Strategies::OAuth2
+
       option :client_options, {
-        :site => "https:\/\/billing.atomdeploy.com",
-        :authorize_url => "https:\/\/billing.atomdeploy.com\/oauth\/authorize.php",
-        :token_url => "https:\/\/billing.atomdeploy.com\/oauth\/token.php"
+        :site => "https://billing.virtengine.com",
+        :authorize_url => "https://billing.virtengine.com/whmcs/oauth/authorize.php",
+        :token_url => "https://billing.virtengine.com/whmcs/oauth/token.php"
       }
 
       def request_phase
         super
       end
-      
+
       def authorize_params
         super.tap do |params|
           %w[scope client_options].each do |v|
@@ -56,11 +57,10 @@ module OmniAuth
         primary && primary['email'] || emails.first && emails.first['email']
       end
 
-      # The new /user/emails API - http://developer.github.com/v3/users/emails/#future-response
       def emails
         return [] unless email_access_allowed?
         access_token.options[:mode] = :query
-        @emails ||= access_token.get('user/emails', :headers => { 'Accept' => 'application/vnd.github.v3' }).parsed
+        @emails ||= access_token.get('user/emails', :headers => { 'Accept' => 'application/vnd.whmcs.v1' }).parsed
       end
 
       def email_access_allowed?
@@ -71,4 +71,4 @@ module OmniAuth
   end
 end
 
-OmniAuth.config.add_camelization 'github', 'GitHub'
+OmniAuth.config.add_camelization 'whmcs', 'WHMCS'
