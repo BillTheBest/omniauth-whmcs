@@ -1,39 +1,39 @@
-# OmniAuth GitHub
+# OmniAuth WHMCS
 
-This is the official OmniAuth strategy for authenticating to GitHub. To
+This is the  OmniAuth strategy for authenticating to WHMCS. To
 use it, you'll need to sign up for an OAuth2 Application ID and Secret
-on the [GitHub Applications Page](https://github.com/settings/applications).
+on the [WHMCS Single Signon Page](http://docs.whmcs.com/WHMCS_Single_Sign-On).
 
 ## Basic Usage
 
     use OmniAuth::Builder do
-      provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+      provider :whmcs, ENV['WHMCS_KEY'], ENV['WHMCS_SECRET']
     end
 
-## Github Enterprise Usage
+## VirtEngine Enterprise Usage
 
-    provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'],
+    provider :whmcs, ENV['WHMCS_KEY'], ENV['WHMCS_SECRET'],
         {
           :client_options => {
-            :site => 'https://github.YOURDOMAIN.com/api/v3',
-            :authorize_url => 'https://github.YOURDOMAIN.com/login/oauth/authorize',
-            :token_url => 'https://github.YOURDOMAIN.com/login/oauth/access_token',
+            :site => 'https://billing.virtengine.com',
+            :authorize_url => 'https://billing.virtengine.com/whmcs/oauth/authorize.php',
+            :token_url => 'https://billing.virtengine.com/whmcs/oauth/access_token.php',
           }
         }
 
 ## Scopes
 
-GitHub API v3 lets you set scopes to provide granular access to different types of data: 
+WHMCS lets you set scopes to provide granular access to different types of data:
 
 	use OmniAuth::Builder do
-      provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], scope: "user,repo,gist"
+      provider :whmcs, ENV['WHMCS_KEY'], ENV['WHMCS_SECRET'], scope: "clientarea:profile, clientarea:billing_info"
     end
 
-More info on [Scopes](http://developer.github.com/v3/oauth/#scopes).
+More info on [Scopes](http://docs.whmcs.com/WHMCS_Single_Sign-On_Developer_Guide).
 
 ## License
 
-Copyright (c) 2011 Michael Bleigh and Intridea, Inc.
+Copyright (c) 2016 DET.io, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

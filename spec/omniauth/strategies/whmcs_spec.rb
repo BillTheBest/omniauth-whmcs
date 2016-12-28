@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe OmniAuth::Strategies::GitHub do
+describe OmniAuth::Strategies::WHMCS do
   let(:access_token) { stub('AccessToken', :options => {}) }
   let(:parsed_response) { stub('ParsedResponse') }
   let(:response) { stub('Response', :parsed => parsed_response) }
@@ -9,7 +9,7 @@ describe OmniAuth::Strategies::GitHub do
   let(:enterprise_authorize_url) { 'https://some.other.site.com/login/oauth/authorize' }
   let(:enterprise_token_url)     { 'https://some.other.site.com/login/oauth/access_token' }
   let(:enterprise) do
-    OmniAuth::Strategies::GitHub.new('GITHUB_KEY', 'GITHUB_SECRET',
+    OmniAuth::Strategies::WHMCS.new('WHMCS_KEY', 'WHMCS_SECRET',
         {
             :client_options => {
                 :site => enterprise_site,
@@ -21,7 +21,7 @@ describe OmniAuth::Strategies::GitHub do
   end
 
   subject do
-    OmniAuth::Strategies::GitHub.new({})
+    OmniAuth::Strategies::WHMCS.new({})
   end
 
   before(:each) do
